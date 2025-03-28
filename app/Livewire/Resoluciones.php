@@ -11,8 +11,8 @@ class Resoluciones extends Component
     use WithFileUploads;
 
     public $numero_exp, $numero_resolucion, $fecha, $barrio, $casa, $pdf;
-    public $showModal = false;
-
+    public $modalOpen = false;
+   
     protected $rules = [
         'numero_exp' => 'required|string',
         'numero_resolucion' => 'required|string',
@@ -25,7 +25,11 @@ class Resoluciones extends Component
     public function abrirModal()
     {
         $this->reset(); // Resetea los campos al abrir el modal
-        $this->showModal = true;
+        $this->modalOpen = true;
+    }
+    public function cerrarModal()
+    {
+        $this->modalOpen = false;
     }
 
     public function guardar()
@@ -44,7 +48,7 @@ class Resoluciones extends Component
         ]);
 
         $this->reset(); // Limpia los campos
-        $this->showModal = false; // Cierra el modal
+        $this->cerrarModal();
         session()->flash('message', 'Resolución subida con éxito');
     }
 
